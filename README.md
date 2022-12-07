@@ -1,6 +1,6 @@
 # Nerd Valorant Api &middot; [![Tests](https://github.com/cod3mos/nerd-valorant-api/actions/workflows/coverage.yml/badge.svg)](https://github.com/cod3mos/nerd-valorant-api/actions/workflows/coverage.yml) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/cod3mos/nerd-valorant-api/blob/main/LICENSE)
 
-Nerd Valorant Api.
+Api dedicated to the app Nerd Valorant.
 
 ## Author
 
