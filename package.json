@@ -4,11 +4,11 @@
   "description": "Api dedicated to the app Nerd Valorant.",
   "main": "app.ts",
   "scripts": {
-    "test": "jest",
-    "start": "node dist/app.js",
+    "dev": "NODE_ENV=development nodemon --inspect=0.0.0.0 -w lib -w 'src/' --exec 'ts-node src/app.ts' -e ts",
+    "start": "NODE_ENV=production node dist/app.js",
     "build": "rm -rf dist && tsc",
     "coverage": "jest --coverage",
-    "dev": "nodemon --inspect=0.0.0.0 -w lib -w 'src/' --exec 'ts-node src/app.ts' -e ts"
+    "test": "jest"
   },
   "author": "Dione Carlos <contato@codemos.com.br>",
   "homepage": "https://github.com/cod3mos/nerd-valorant-api#readme",
