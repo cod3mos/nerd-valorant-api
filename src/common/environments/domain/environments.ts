@@ -5,10 +5,13 @@ import { EnvironmentsNotFound } from './exceptions/environments-not-found'
 export interface Secrets {
   PORT: string
   NODE_ENV: string
+  YOUTUBE_API_URL: string
+  YOUTUBE_API_KEY: string
+  YOUTUBE_API_CHANNEL_ID: string
 }
 
 export class Environments {
-  private readonly secrets: any[] = []
+  private secrets: Record<string, any> = {}
 
   constructor (params: any) {
     this.valid(params)
@@ -27,7 +30,7 @@ export class Environments {
         errors.push(item)
       }
 
-      this.secrets.push({ [item]: secrets[item] })
+      this.secrets = { ...this.secrets, [item]: secrets[item] }
     }
 
     if (isNotEmpty(errors)) {
