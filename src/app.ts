@@ -1,4 +1,5 @@
 import 'reflect-metadata'
+import './schedules/cron/cron-schedules'
 
 import bootstraps from './app-bootstraps'
 import processes from './app-processes'
