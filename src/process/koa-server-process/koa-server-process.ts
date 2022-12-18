@@ -67,8 +67,6 @@ export class KoaServerProcess implements Process {
 
     server.use(router.routes())
 
-    server.listen(port, () => {
-      console.log(`Listening to requests on http://localhost:${port}`)
-    })
+    server.listen(port)
   }
 }
