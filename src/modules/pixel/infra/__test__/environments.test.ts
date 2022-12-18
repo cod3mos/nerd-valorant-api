@@ -13,8 +13,6 @@ describe('Pixel', () => {
   it('create a new pixel instance and validate its data', async () => {
     const pixel = await getPixelService().create(new PixelDataTest())
 
-    console.log('===>', pixel.getId())
-
     expect(pixel).toBeInstanceOf(Pixel)
     expect(pixel.getTags()).toHaveLength(3)
   })
