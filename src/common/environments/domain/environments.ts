@@ -8,6 +8,7 @@ export interface Secrets {
   YOUTUBE_API_URL: string
   YOUTUBE_API_KEY: string
   YOUTUBE_API_CHANNEL_ID: string
+  MONGODB_URL_CONNECTION: string
 }
 
 export class Environments {
