@@ -6,7 +6,7 @@ import { PixelRepository } from '../../domain/pixel-repository'
 import { PixelTest } from '../__test__/__mocks__/pixel-test'
 import { PixelTestFirst } from '../__test__/__mocks__/pixel-test-first'
 
-export class PixelDatabaseRepositoryTest implements PixelRepository {
+export class PixelRepositoryTest implements PixelRepository {
   private readonly pixels: Pixel[] = [new PixelTestFirst()]
 
   async create (data: PixelData): Promise<Pixel> {
