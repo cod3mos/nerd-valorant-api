@@ -5,8 +5,7 @@
   "main": "app.ts",
   "scripts": {
     "dev": "NODE_ENV=development nodemon --inspect=0.0.0.0 -w lib -w 'src/' --exec 'ts-node src/app.ts' -e ts",
-    "start": "NODE_ENV=production node dist/app.js",
-    "build": "rm -rf dist && tsc",
+    "start": "rm -rf dist && tsc && NODE_ENV=production node dist/app.js",
     "coverage": "jest --coverage",
     "test": "jest"
   },

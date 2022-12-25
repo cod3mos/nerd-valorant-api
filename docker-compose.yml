@@ -1,0 +1,16 @@
+version: '3.3'
+
+services:
+  api:
+    build: .
+    container_name: nerd_valorant_api
+    command: npm start
+    restart: always
+    ports:
+      - '3000:3000'
+      - '9229:9229'
+    env_file:
+      - .env
+    volumes:
+      - ./src:/home/nerd-valorant/api/src
+      - ./nodemon.json:/home/nerd-valorant/api/nodemon.json
