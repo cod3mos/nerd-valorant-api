@@ -1,5 +1,6 @@
 
 import { uid } from 'uid'
+import { Maybe } from '../../../../common/protocols/maybe'
 import { Pixel } from '../../domain/pixel'
 import { PixelData } from '../../domain/pixel-data'
 import { PixelRepository } from '../../domain/pixel-repository'
@@ -8,6 +9,10 @@ import { PixelTestFirst } from '../__test__/__mocks__/pixel-test-first'
 
 export class PixelRepositoryTest implements PixelRepository {
   private readonly pixels: Pixel[] = [new PixelTestFirst()]
+
+  async getOneBy (id: string): Promise<Maybe<Pixel>> {
+    return this.pixels.find(item => item.getVideoId() === id) ?? null
+  }
 
   async create (data: PixelData): Promise<Pixel> {
     const pixel = new PixelTest({

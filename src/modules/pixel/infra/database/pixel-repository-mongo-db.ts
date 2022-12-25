@@ -1,6 +1,7 @@
 import { inject, injectable } from 'tsyringe'
 import { DataSource, Repository } from 'typeorm'
 import { DbConnectionTypeEnum } from '../../../../common/database/DbConnectionTypeEnum'
+import { Maybe } from '../../../../common/protocols/maybe'
 import { Pixel } from '../../domain/pixel'
 import { PixelData } from '../../domain/pixel-data'
 import { PixelRepository } from '../../domain/pixel-repository'
@@ -9,10 +10,22 @@ import { PixelEntity } from './entities/pixel-entity'
 
 @injectable()
 export class PixelRepositoryMongoDb implements PixelRepository {
-  constructor (@inject(DbConnectionTypeEnum.DB_CONNECTION) protected connection: DataSource) {}
+  constructor (@inject(DbConnectionTypeEnum.DB_CONNECTION) protected connection: DataSource) { }
 
   private repository (): Repository<PixelEntity> {
     return this.connection.getRepository(PixelEntity)
+  }
+
+  async getOneBy (id: string): Promise<Maybe<Pixel>> {
+    const _pixel = await this.repository().findOne({
+      where: {
+        id: {
+          videoId: id
+        }
+      }
+    })
+
+    return PixelEntityToPixelAdapter.from(_pixel)
   }
 
   async create (pixel: PixelData): Promise<Pixel> {
@@ -29,6 +42,6 @@ export class PixelRepositoryMongoDb implements PixelRepository {
       }
     })
 
-    return PixelEntityToPixelAdapter.from(_pixel)
+    return PixelEntityToPixelAdapter.from(_pixel)!
   }
 }

@@ -1,10 +1,11 @@
+import { Maybe } from '../../../../../common/protocols/maybe'
 import { Pixel } from '../../../domain/pixel'
 import { PixelEntity } from '../entities/pixel-entity'
 
 export class PixelEntityToPixelAdapter extends Pixel {
   constructor (pixel: any) {
     super({
-      id: pixel._id,
+      id: pixel.id.videoId,
       tags: pixel.tags,
       title: pixel.snippet.title,
       video_id: pixel.id.videoId,
@@ -14,7 +15,9 @@ export class PixelEntityToPixelAdapter extends Pixel {
     })
   }
 
-  static from (pixelEntity: PixelEntity): Pixel {
+  static from (pixelEntity: Maybe<PixelEntity>): Maybe<Pixel> {
+    if (!pixelEntity) return null
+
     return new PixelEntityToPixelAdapter(pixelEntity)
   }
 }

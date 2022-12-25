@@ -18,12 +18,19 @@ export async function handleNewVideosPosted (): Promise<void> {
     part: 'snippet',
     key: process.getEnv().YOUTUBE_API_KEY,
     channelId: process.getEnv().YOUTUBE_API_CHANNEL_ID,
-    publishedAfter: DateTime.now().toISODate().concat('T03:00:01Z')
+    publishedAfter: DateTime.now().toFormat('yyyy-MM-dd').concat('T03:00:01Z')
   }))
 
-  const promises = result.getData().items.map(async (item): Promise<Pixel> => {
-    return await getPixelService().create(YoutubeSearchListItemToPixelDataAdapter.from(item))
+  const data = {
+    pixels: result.getData().items,
+    added: result.getData().items.length
+  }
+
+  const promises = data.pixels.map(async (item): Promise<number | Pixel> => {
+    return await getPixelService().create(YoutubeSearchListItemToPixelDataAdapter.from(item)).catch(() => data.added--)
   })
 
-  await Promise.all(promises).catch(error => console.log('<=== ERROR ===>', error))
+  await Promise.all(promises)
+
+  console.log(`<=== CRON FINISHED WITH ${data.added} PIXELS ADDED ===>`)
 }
